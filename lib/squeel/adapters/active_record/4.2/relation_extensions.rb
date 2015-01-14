@@ -127,6 +127,15 @@ module Squeel
 
           attributes
         end
+
+        def execute_grouped_calculation(operation, column_name, distinct)
+          arel = Arel::SelectManager.new(table.engine, table)
+          build_join_dependency(arel, joins_values.flatten) unless joins_values.empty?
+          super
+        end 
+
+        
+        
       end
     end
   end
