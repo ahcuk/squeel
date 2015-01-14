@@ -17,7 +17,7 @@ module Squeel
           self
         end
         
-                def build_arel
+        def build_arel
           arel = Arel::SelectManager.new(table.engine, table)
 
           build_joins(arel, joins_values.flatten) unless joins_values.empty?
