@@ -39,15 +39,7 @@ module Squeel
           arel.from(build_from) if from_value
           arel.lock(lock_value) if lock_value
 
-          # Reorder bind indexes when joins or subqueries include more bindings.
-          # Special for PostgreSQL
-          if arel.bind_values.any? || bind_values.size > 1
-            bvs = arel.bind_values + bind_values
-            arel.ast.grep(Arel::Nodes::BindParam).each_with_index do |bp, i|
-              column = bvs[i].first
-              bp = connection.substitute_at(column, i)
-            end
-          end
+         
 
           arel
         end
